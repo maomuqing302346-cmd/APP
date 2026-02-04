@@ -10,17 +10,19 @@ import json
 # 1. 页面配置
 # ==========================================
 st.set_page_config(page_title="激光器维修系统 (局域网共享版)", page_icon="🔋", layout="wide")
-
 # ==========================================
-# 2. 数据持久化设置 (存到本地 D 盘)
+# 2. 数据持久化设置 (同级目录版)
 # ==========================================
-# 【设置】数据存储文件夹 (建议设为 D 盘或 C 盘根目录)
-DATA_FOLDER = r"D:\Laser_App_Data"
+# 获取当前代码所在的文件夹路径
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# 数据库文件路径
+# 数据存到代码同级目录的 data 文件夹里
+DATA_FOLDER = os.path.join(CURRENT_DIR, "Laser_App_Data")
 DB_FILE = os.path.join(DATA_FOLDER, "laser_database.json")
-# 模板文件路径
-TEMPLATE_FILE = os.path.join(DATA_FOLDER, "template.docx")
+
+# 【重点】模板直接去读代码旁边的文件，或者也放在 Data 文件夹里
+# 方案 A：模板就在代码旁边 (推荐)
+TEMPLATE_FILE = os.path.join(CURRENT_DIR, "template.docx") 
 
 def ensure_data_folder_exists():
     """确保文件夹存在"""
